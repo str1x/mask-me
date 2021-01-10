@@ -1,11 +1,13 @@
-import * as _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '@src/App';
 
-function component() {
-  const element = document.createElement('div');
+// TODO inject global styles in html template
+document.body.style.setProperty('font-family', 'system-ui');
 
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-  return element;
-}
-
-document.body.appendChild(component());
+ReactDOM.render(
+  React.createElement(App),
+  document.body.appendChild(
+    document.createElement('div'),
+  ),
+);

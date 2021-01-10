@@ -8,8 +8,9 @@
     "allowJs": true,
     "baseUrl": ".",
     "sourceMap": true,
+    "esModuleInterop": true,
     "paths": {
-      "@src": ["src"]
+      "@src/*": ["src/*"]
     }
   },
 }
