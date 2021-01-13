@@ -5,9 +5,9 @@ import MaskRenderer from '@src/MaskRenderer';
 
 const Container = styled.div`
   position: relative;
-  width: 600px;
-  height: 600px;
   border: 1px solid red;
+  width: 640px;
+  height: 480px;
 `;
 
 const Video = styled.video`
@@ -21,19 +21,19 @@ const Video = styled.video`
 export default () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const faceDetector = useRef(null);
-  const maskRenderer = useRef(null);
+  let faceDetector: FaceDetector = null;
+  let maskRenderer: MaskRenderer = null;
 
   useEffect(() => {
-    maskRenderer.current = new MaskRenderer(canvasRef.current);
-    faceDetector.current = new FaceDetector(videoRef.current, maskRenderer.current);
-    faceDetector.current.start();
+    maskRenderer = new MaskRenderer(canvasRef.current);
+    faceDetector = new FaceDetector(videoRef.current, maskRenderer);
+    faceDetector.start();
 
     return () => {
-      maskRenderer.current.cleanContext();
-      maskRenderer.current = null;
-      faceDetector.current.stop();
-      faceDetector.current = null;
+      maskRenderer.cleanContext();
+      maskRenderer = null;
+      faceDetector.stop();
+      faceDetector = null;
     };
   }, []);
 
